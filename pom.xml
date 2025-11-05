@@ -1,0 +1,131 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>Mailosaur</groupId>
+  <artifactId>EmailTesting</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <properties>
+    <maven.compiler.source>21</maven.compiler.source>
+    <maven.compiler.target>21</maven.compiler.target>
+  </properties>
+
+  <build>
+    <plugins>
+      <!-- ✅ Compiler Plugin -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.11.0</version>
+        <configuration>
+          <source>21</source>
+          <target>21</target>
+        </configuration>
+      </plugin>
+
+      <!-- ✅ Surefire Plugin (JUnit runner for Cucumber) -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>3.1.2</version>
+        <configuration>
+          <includes>
+            <include>**/runners/*Test*.java</include>
+          </includes>
+        </configuration>
+      </plugin>
+
+      <!-- ✅ Allure Maven Plugin -->
+      <plugin>
+        <groupId>io.qameta.allure</groupId>
+        <artifactId>allure-maven</artifactId>
+        <version>2.11.2</version>
+        <configuration>
+          <!-- Ensure results go into target/allure-results -->
+          <resultsDirectory>${project.build.directory}/allure-results</resultsDirectory>
+          <reportDirectory>${project.build.directory}/site/allure-maven-plugin</reportDirectory>
+        </configuration>
+  <executions>
+    <execution>
+      <id>allure-report</id>
+      <phase>verify</phase>
+      <goals>
+        <goal>report</goal>
+        <goal>serve</goal>
+      </goals>
+    </execution>
+  </executions>
+      </plugin>
+    </plugins>
+  </build>
+
+  <dependencies>
+  <!-- Selenium (one version only) -->
+  <dependency>
+    <groupId>org.seleniumhq.selenium</groupId>
+    <artifactId>selenium-java</artifactId>
+    <version>4.23.0</version>
+  </dependency>
+
+  <dependency>
+    <groupId>io.github.bonigarcia</groupId>
+    <artifactId>webdrivermanager</artifactId>
+    <version>5.8.0</version>
+  </dependency>
+
+  <!-- JUnit 4 (you’re using Assert.*) -->
+  <dependency>
+    <groupId>junit</groupId>
+    <artifactId>junit</artifactId>
+    <version>4.13.2</version>
+    <scope>test</scope>
+  </dependency>
+
+  <!-- Cucumber 7 + JUnit -->
+  <dependency>
+    <groupId>io.cucumber</groupId>
+    <artifactId>cucumber-java</artifactId>
+    <version>7.14.0</version>
+  </dependency>
+  <dependency>
+    <groupId>io.cucumber</groupId>
+    <artifactId>cucumber-junit</artifactId>
+    <version>7.14.0</version>
+    <scope>test</scope>
+  </dependency>
+
+  <!-- Allure Cucumber 7 -->
+  <dependency>
+    <groupId>io.qameta.allure</groupId>
+    <artifactId>allure-cucumber7-jvm</artifactId>
+    <version>2.29.0</version>
+    <scope>test</scope>
+  </dependency>
+
+  <!-- Mailosaur -->
+  <dependency>
+    <groupId>com.mailosaur</groupId>
+    <artifactId>mailosaur-java</artifactId>
+    <version>9.0.0</version>
+  </dependency>
+
+  <!-- Rest Assured (if you really need it) -->
+  <dependency>
+    <groupId>io.rest-assured</groupId>
+    <artifactId>rest-assured</artifactId>
+    <version>5.5.5</version>
+  </dependency>
+  <dependency>
+    <groupId>io.rest-assured</groupId>
+    <artifactId>json-path</artifactId>
+    <version>5.5.5</version>
+  </dependency>
+  <dependency>
+    <groupId>io.rest-assured</groupId>
+    <artifactId>json-schema-validator</artifactId>
+    <version>5.5.5</version>
+  </dependency>
+
+  <!-- Remove these unless absolutely required to avoid conflicts:
+       gson, xml-apis, log4j-core, scribejava-apis -->
+</dependencies>
+
+</project>
