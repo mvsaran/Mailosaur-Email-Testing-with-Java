@@ -197,6 +197,4 @@ This tutorial covers:
 
 **Saran Kumar**
 
----
 
-## 💬 Support
